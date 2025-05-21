@@ -122,6 +122,7 @@ return {
 	--WAND AND SPELL
 		['wand'] = {
 		label = 'Baguette',
+		description = 'Une baguette magique un peu banale',
 		weight = 500,
 		client = {
 			image = 'wand.png',
@@ -129,19 +130,47 @@ return {
 		}
 	},
 
-		['fireball_spell'] = {
-		label = 'Boule de feu',
-		client = {
-			image = 'fireball.png',
-			export = 'ox_inventory.fireball'
-		}
+	['fireball_skill'] = {
+			label = 'Boule de Feu',
+			weight = 0.1,
+			stack = false,
+			close = false,
+			description = 'Un sort de boule de feu',
+			client = {
+					-- Métadonnées personnalisées pour le script de sorts
+					spellData = {
+							name = 'Boule de Feu',
+							damage = 50,
+							range = 100.0,
+							cooldown = 5000,
+							fx = {
+                trail = "scr_fbi3_fire",
+                impact = "scr_exp_grnd"
+							},
+							image = 'fireball.png',
+							export = 'ox_inventory.fireball'
+					}
+			}
 	},
-
-			['icebolt_spell'] = {
-		label = 'Éclair de Glace',
-		client = {
-			image = 'fireball.png',
-			export = 'ox_inventory.icebolt'
-		}
-	},
+	['icebolt_skill'] = {
+			label = 'Trait de Glace',
+			weight = 0.1,
+			stack = true,
+			close = true,
+			description = 'Un sort de projectile de glace',
+			client = {
+					spellData = {
+							name = 'Trait de Glace',
+							damage = 30,
+							range = 80.0,
+							cooldown = 3000,
+							fx = {
+                trail = "scr_mg_blast",
+                impact = "scr_exp_grm"
+							},
+							image = 'iceball.png',
+							export = 'ox_inventory.icebolt'
+					}
+			}
+	}
 }
