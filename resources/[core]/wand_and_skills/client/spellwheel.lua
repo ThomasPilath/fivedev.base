@@ -7,9 +7,17 @@ local spellWheel = {
     slot6 = nil
 }
 
+-- Fonction pour vérifier si la baguette est équipée
+function IsWandEquipped()
+    local playerPed = PlayerPedId()
+    local currentWeapon = GetSelectedPedWeapon(playerPed)
+    local wandHash = GetHashKey("weapon_magic_wand")  -- Assurez-vous que ce hash correspond à votre baguette
+    
+    return currentWeapon == wandHash
+end
+
 -- Fonction pour ouvrir l'interface de configuration de la roue
 function OpenSpellWheelConfiguration()
-    -- Créer un menu personnalisé avec inventaire et roue de sorts
     local menuElements = {}
     local inventory = exports.ox_inventory:GetInventory()
 
@@ -17,6 +25,7 @@ function OpenSpellWheelConfiguration()
     for _, item in ipairs(inventory) do
         local itemData = exports.ox_inventory:GetItemData(item.name)
         local spellData = itemData and itemData.client and itemData.client.spellData
+        
         if spellData then
             table.insert(menuElements, {
                 label = spellData.name,
@@ -99,15 +108,18 @@ end)
 function UseSpellFromWheel(slotNumber)
     local spellItemName = spellWheel['slot'..slotNumber]
     if spellItemName then
-        local spellData = exports.ox_inventory:GetItemData(spellItemName)?.client?.spellData
+        local itemData = exports.ox_inventory:GetItemData(spellItemName)
+        local spellData = itemData and itemData.client and itemData.client.spellData
+        
         if spellData then
-            -- Logique de lancement de sort similaire au script précédent
-            castSpell(spellData)
+            -- Logique de lancement de sort
+            -- À adapter selon votre système de sorts
+            print("Utilisation du sort : " .. spellItemName)
         end
     end
 end
 
--- Raccourcis pour utiliser les sorts de la roue
+-- Gestion des raccourcis pour utiliser les sorts
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)

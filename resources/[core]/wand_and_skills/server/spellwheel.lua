@@ -1,18 +1,12 @@
-local ox_inventory = exports.ox_inventory
-
--- Charger la roue de sorts du joueur
+-- Adaptez selon votre framework
 function LoadPlayerSpellWheel(source)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    local identifier = xPlayer.identifier
-
-    -- Requête pour récupérer la roue de sorts
+    local identifier = GetPlayerIdentifier(source)
     MySQL.Async.fetchAll('SELECT * FROM user_spellwheel WHERE identifier = @identifier', {
         ['@identifier'] = identifier
     }, function(result)
         if result[1] then
             TriggerClientEvent('spell:LoadSpellWheel', source, result[1])
         else
-            -- Créer une nouvelle entrée si inexistante
             MySQL.Async.execute('INSERT INTO user_spellwheel (identifier) VALUES (@identifier)', {
                 ['@identifier'] = identifier
             })
@@ -20,12 +14,9 @@ function LoadPlayerSpellWheel(source)
     end)
 end
 
--- Sauvegarder la roue de sorts du joueur
 RegisterNetEvent('spell:SaveSpellWheel')
 AddEventHandler('spell:SaveSpellWheel', function(spellWheel)
-    local xPlayer = ESX.GetPlayerFromId(source)
-    local identifier = xPlayer.identifier
-
+    local identifier = GetPlayerIdentifier(source)
     MySQL.Async.execute([[
         UPDATE user_spellwheel 
         SET slot1 = @slot1, slot2 = @slot2, slot3 = @slot3, 
