@@ -118,4 +118,30 @@ return {
 		stack = true,
 		close = true,
 	},
+
+	--WAND AND SPELL
+		['wand'] = {
+		label = 'Baguette',
+		weight = 500,
+		client = {
+			image = 'wand.png',
+			export = 'ox_inventory.wand'
+		}
+	},
+
+		['fireball_spell'] = {
+		label = 'Boule de feu',
+		client = {
+			image = 'fireball.png',
+			export = 'ox_inventory.fireball'
+		}
+	},
+
+			['icebolt_spell'] = {
+		label = 'Éclair de Glace',
+		client = {
+			image = 'fireball.png',
+			export = 'ox_inventory.icebolt'
+		}
+	},
 }
