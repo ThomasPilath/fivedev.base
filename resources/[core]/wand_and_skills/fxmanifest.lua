@@ -6,7 +6,17 @@ description 'Système de Baguette et de Sortilèges'
 version '1.0.0'
 lua54 'yes'
 
-shared_script '@ox_lib/init.lua'
-client_script 'config.lua'
-client_script 'client/main.lua'
-server_script 'server/main.lua'
+dependencies {
+    'ox_inventory',
+    'ox_lib',
+    -- Autres dépendances
+}
+
+server_scripts {
+    '@oxmysql/lib/MySQL.lua',  -- Si vous utilisez oxmysql
+    'server/spellwheel.lua'
+}
+
+client_scripts {
+    'client/spellwheel.lua'
+}

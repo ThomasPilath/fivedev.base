@@ -130,7 +130,7 @@ return {
 		}
 	},
 
-	['fireball_skill'] = {
+	['fireball_spell'] = {
 			label = 'Boule de Feu',
 			weight = 0.1,
 			stack = false,
@@ -152,7 +152,7 @@ return {
 					}
 			}
 	},
-	['icebolt_skill'] = {
+	['icebolt_spell'] = {
 			label = 'Trait de Glace',
 			weight = 0.1,
 			stack = true,
